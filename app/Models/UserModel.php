@@ -9,6 +9,12 @@ class UserModel extends Model
 {
     protected $table = 'users';
 
+    protected $guarded = [];
+
+    public $incrementing = false;
+
+    protected $keyType = 'string';
+
     public function getUser()
     {
         return DB::table('users')
@@ -17,6 +23,7 @@ class UserModel extends Model
                 'users.id',
                 'users.name as nama',
                 'users.nim',
+                'users.kelas_id',
                 'kelas.nama_kelas'
             )
             ->get();

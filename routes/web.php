@@ -11,6 +11,7 @@ Route::get('/', function () {
 
 Route::get('/profile', [ProfileController::class, 'profile']);
 
+// User
 Route::get('/user', [UserController::class, 'index']);
 
 Route::get('/user/create', [UserController::class, 'create'])
@@ -19,6 +20,13 @@ Route::get('/user/create', [UserController::class, 'create'])
 Route::post('/user', [UserController::class, 'store'])
     ->name('user.store');
 
+Route::get('/user/{id}/edit', [UserController::class, 'edit']);
+
+Route::put('/user/{id}', [UserController::class, 'update']);
+
+Route::delete('/user/{id}', [UserController::class, 'destroy']);
+
+// Mata Kuliah
 Route::get('/matakuliah', [MataKuliahController::class, 'index']);
 
 Route::get('/matakuliah/create', [MataKuliahController::class, 'create']);

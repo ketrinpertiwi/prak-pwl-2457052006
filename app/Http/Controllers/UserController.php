@@ -51,4 +51,46 @@ class UserController extends Controller
 
         return redirect('/user');
     }
+
+    public function edit($id)
+    {
+        $user = UserModel::findOrFail($id);
+
+        $kelasModel = new Kelas();
+        $kelas = $kelasModel->getKelas();
+
+        return view('edit_user', [
+            'title' => 'Edit User',
+            'user' => $user,
+            'kelas' => $kelas,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama' => 'required',
+            'npm' => 'required',
+            'kelas_id' => 'required',
+        ]);
+
+        $user = UserModel::findOrFail($id);
+
+        $user->update([
+            'name' => $request->nama,
+            'nim' => $request->npm,
+            'kelas_id' => $request->kelas_id,
+        ]);
+
+        return redirect('/user');
+    }
+
+    public function destroy($id)
+    {
+        $user = UserModel::findOrFail($id);
+
+        $user->delete();
+
+        return redirect('/user');
+    }
 }
